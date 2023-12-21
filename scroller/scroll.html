@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <title></title>
+    <meta content="">
+    <style></style>
+    <script src="jquery.min.js"></script>
+    <script src="functions.js"></script>
+  </head>
+  <body>
+
+
+
+
+  <div id="log"></div>
+
+  <div id="text">
+  This page generate scroll data for the Scroller python class<br/>
+  1) scroll and reach the bottom<br/>
+  2) press any keyboard button<br/>
+  3) get the data<br/>
+  Logs are : "distance duration_ms"<br/><br/><br/>
+  </div>
+
+  <script>
+
+
+  
+    nbLines = 200; // 10000
+
+
+    allLogs = ""
+    
+    addLines("text", nbLines);
+
+
+    
+
+    currentScrollY = window.scrollY
+    currentTimestamp = getTimestamp()
+    window.addEventListener('scroll', function()
+    {
+            newScrollY = window.scrollY;
+            diffScrollY = newScrollY - currentScrollY;
+            newTimestamp = getTimestamp();
+            diffTimestamp = newTimestamp - currentTimestamp;
+            allLogs += diffScrollY + " " + diffTimestamp + "<br/>"
+            currentScrollY = newScrollY;
+            currentTimestamp = newTimestamp;
+    }, true)
+
+    $("body").keypress(function()
+    {
+        $("#text").html("");
+        $("#log").html("");
+        $("#log").append(allLogs);
+    });
+
+
+  </script>
+
+
+  </body>
+</html>
